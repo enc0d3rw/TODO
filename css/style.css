@@ -1,0 +1,80 @@
+body {
+    background-color: lightgray;
+    text-align: center;
+}
+
+main {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert {
+    color: red;
+    margin: 15px;
+}
+
+.form-add {
+    margin-bottom: 25px;
+}
+
+ul.task-list {
+    list-style-type: none;
+    margin: 0 50px;
+}
+
+ul.task-list li {
+    position: relative;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+ul.task-list li > p {
+    font: bold 18px serif;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.task-value {
+    width: 50%;
+    padding: 3px 5px 6px 5px;
+    font-size: 14px;
+}
+
+.btn {
+    width: 100px;
+    height: 30px;
+    background-color: #90a3f3;
+    border: 1px solid hsl(222, 89%, 38%);
+    color: #ffffff;
+}
+
+.btn-remove {
+    background: url('../img/cross.svg') no-repeat;
+    border: none;
+    font-size: 16px;
+    color: silver;
+    opacity: 0.5;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.btn-remove:hover, .btn-remove:focus {
+    cursor: pointer;
+    color: #000000;
+    opacity: 1;
+}
+
+.btn-remove:focus {
+    outline: none;
+}

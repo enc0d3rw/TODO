@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Мои задачи</h1>
+  </header>
+  <main>
+    <div class="form-add">
+        <div class="alert hidden">Текст</div>
+        <form action="#">
+            <input type="text" class="task-value" name="tast-value" placeholder="Название задачи" minlength="2" required>
+            <button class="btn add-task">Добавить</button>
+          </form>
+    </div>
+
+    <ul class="task-list"></ul>
+    <template id="task-list-item">
+      <li><p class="task-text">Задача</p><button value="Удалить" id="0" class="btn-remove" onclick="window.removeTask(this)"></button></li>
+    </template>
+    <div class="empty-list hidden">Список задач пуст!</div>
+  </main>
+  <script src="js/save-list.js"></script>
+  <script src="js/get-data.js"></script>
+  <script src="js/render-tasks.js"></script>
+  <script src="js/remove-task.js"></script>
+  <script src="js/add-task.js"></script>
+</body>
+</html>
