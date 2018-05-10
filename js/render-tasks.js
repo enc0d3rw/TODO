@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+    //localStorage.clear();
     // Функция рендерит весь список
     window.renderTasks = function () {
         var taskList = document.querySelector('.task-list'); // Место для вставки списка
@@ -18,11 +19,12 @@
 
         // Заполняем HTML шаблон данными
         var initTask = function () {
-            var taskListData  = window.getData(); // Получаем данные из localStorage
-            if (taskListData && taskListData.tasks.length !== 0) {
-                taskListData.tasks.reverse();
+            var taskListData  = window.getData(window.Config.Data.OBJECT_NAME); // Получаем объект с данными из localStorage
+            var item = window.Config.Data.ITEM_NAME; // Получаем имя нужного нам массива с данными в объекте window.Config.Data.OBJECT_NAME
+            if (taskListData && taskListData[item].length !== 0) {
+                taskListData[item].reverse();
                 emptyList.classList.add('hidden');
-                taskListData.tasks.forEach(function (element) {
+                taskListData[item].forEach(function (element) {
                     taskText.textContent = element.text;
                     btnRemove.id = element.id;
                     renderTask();

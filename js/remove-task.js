@@ -4,21 +4,15 @@
     window.removeTask = function (elem) {
         var taskIndexForRemove = elem.id; // Получаем ID удаляемой задачи
         taskIndexForRemove = Number(taskIndexForRemove);
-        var list = window.getData();
-        var updatedList = [];
+        var list = window.getData(window.Config.Data.OBJECT_NAME);
+        var listName = window.Config.Data.ITEM_NAME;
         
-        // Ищем задачу и удаляем ее
-        list.tasks.forEach(function (element) {
-            if (element.id !== taskIndexForRemove) {
-                updatedList.push(element);
-            }
+        list[listName] = list[listName].filter(function (element) {
+            return element.id !== taskIndexForRemove;
         });
-
-        list.tasks = updatedList;
         
-        // Если это была последняя задача то мы полностью чистим все
-        if (list.tasks.length === 0) {
-            list = null;
+        //Если это была последняя задача то мы полностью чистим все
+        if (list[listName].length === 0) {
             localStorage.clear();
             window.renderTasks();
             return;

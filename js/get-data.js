@@ -1,14 +1,16 @@
 'use strict';
 (function () {
     // Функция возвращает полученные данные из localStorage
-    // или false если данных нету
-    window.getData = function () {
-        var allTasks = localStorage.getItem('list');
+    // или объект с пустым массивом для дальнешего заполнения
+    window.getData = function (objectName) {
+        var itemName = window.Config.Data.ITEM_NAME; // Получаем имя массива данных
+        var allTasks = localStorage.getItem(objectName);
         if (allTasks) {
             var list = JSON.parse(allTasks);
             return list;
         }
-
-        return false;
+        allTasks = {}; // Добавляем пустой объект
+        allTasks[itemName] = []; // Добавляем пустой массив
+        return allTasks;
     };
 })();

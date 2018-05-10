@@ -3,11 +3,11 @@
     // Функция проверяет валидность элемента
     var checkInput = function (newTask) {
         if (newTask.length === 0) {
-            return 'Поле не должно быть пустым!';
+            return 'Обязательное поле!';
         } else if (newTask.length < 2) {
             return 'Минимальная длина 2 символа!';
         }
-        return false;
+        return '';
     };
 
     // Функция добавляет задачу
@@ -19,7 +19,7 @@
             evt.preventDefault();
             var newTask = taskInput.value;
             var error_msg = checkInput(newTask);
-            var alert = document.querySelector('.alert'); // Место для вывод ошибок если валидация не прошла
+            var alert = document.querySelector('.alert'); // Место для вывода ошибок если валидация не прошла
             if (error_msg) {
                 alert.textContent = error_msg;
                 alert.classList.remove('hidden');
@@ -29,17 +29,11 @@
             }
             
 
-            var list = window.getData();
-            // Если задач нету то мы создаем пустой объект
-            if (!list) {
-                list = {
-                    tasks: []
-                };
-            }
+            var list = window.getData(window.Config.Data.OBJECT_NAME);
+            
             window.saveList(list, newTask); // Функция сохраняет данные в localStorage
             taskInput.value = '';
-            // После добавления в localStorage заново отрисовываем список задач
-            window.renderTasks(); 
+            window.renderTasks(); // После добавления в localStorage заново отрисовываем список задач 
         });
     };
     addTask();
