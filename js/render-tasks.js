@@ -9,23 +9,24 @@
     // Функция рендерит весь список
     window.renderTasks = function () {
         taskList.textContent = ''; // Очищаем список, для отрисовки с 0
-
         var fragment = document.createDocumentFragment(); // Создаем фрагмент документа
-        // Вставляем наши элементы в Fragment
-        var insertInFragment = function () {
-            var taskElement = templateTaks.cloneNode(true);
-            fragment.appendChild(taskElement);
-        };
-
         var taskListData  = window.getData(window.Config.Data.OBJECT_NAME); // Получаем объект с данными из localStorage
         var item = window.Config.Data.ITEM_NAME; // Получаем имя нужного нам массива с данными в объекте window.Config.Data.OBJECT_NAME
+
         if (taskListData && taskListData[item].length !== 0) {
             taskListData[item].reverse();
             emptyList.classList.add('hidden');
-            taskListData[item].forEach(function (element) {
-                taskText.textContent = element.text;
-                btnRemove.id = element.id;
-                insertInFragment();
+
+            // Функция добавляет данные HTML а замем в Fragment
+            var renderHTML = function (id, text) {
+                btnRemove.id = id;
+                taskText.textContent = text;
+                var taskElement = templateTaks.cloneNode(true);
+                fragment.appendChild(taskElement);
+            };
+
+            taskListData[item].map(function (element) {
+                renderHTML(element.id, element.text);
             });
             
         } else {
@@ -33,7 +34,7 @@
             return;
         }
 
-        // Вставляем DocumentFragment со всеми задачи в HTML
+        // Вставляем DocumentFragment со всеми задачами в HTML
         taskList.appendChild(fragment);
     };
 
