@@ -9,8 +9,10 @@
             var list = JSON.parse(allTasks);
             return list;
         }
-        allTasks = {}; // Добавляем пустой объект
-        allTasks[itemName] = []; // Добавляем пустой массив
+        
+        allTasks = {
+            [itemName]: []
+        };
         return allTasks;
     };
 })();

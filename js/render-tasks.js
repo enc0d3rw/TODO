@@ -1,6 +1,5 @@
 'use strict';
 (function () {
-    //localStorage.clear();
     // Функция рендерит весь список
     window.renderTasks = function () {
         var taskList = document.querySelector('.task-list'); // Место для вставки списка
@@ -11,10 +10,11 @@
         
         taskList.textContent = ''; // Очищаем список, для отрисовки с 0
 
-        // Вставляем наши элементы в HTML
-        var renderTask = function () {
+        var fragment = document.createDocumentFragment(); // Создаем фрагмент документа
+        // Вставляем наши элементы в Fragment
+        var insertInFragment = function () {
             var taskElement = templateTaks.cloneNode(true);
-            taskList.appendChild(taskElement);
+            fragment.appendChild(taskElement);
         };
 
         // Заполняем HTML шаблон данными
@@ -27,7 +27,7 @@
                 taskListData[item].forEach(function (element) {
                     taskText.textContent = element.text;
                     btnRemove.id = element.id;
-                    renderTask();
+                    insertInFragment();
                 });
                 
             } else {
@@ -35,7 +35,12 @@
             }
         };
 
-        initTask();
+        // Функция вставляет fragment в HTML
+        var insertFragmentToHTML = function () {
+            initTask();
+            taskList.appendChild(fragment);
+        }
+        insertFragmentToHTML();
     };
 
     window.renderTasks();
