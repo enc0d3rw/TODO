@@ -18,16 +18,14 @@
             emptyList.classList.add('hidden');
 
             // Функция добавляет данные HTML а замем в Fragment
-            var renderHTML = function (id, text) {
-                btnRemove.id = id;
-                taskText.textContent = text;
+            var renderHTML = function (element) {
+                btnRemove.id = element.id;
+                taskText.textContent = element.text;
                 var taskElement = templateTaks.cloneNode(true);
                 fragment.appendChild(taskElement);
             };
 
-            taskListData[item].map(function (element) {
-                renderHTML(element.id, element.text);
-            });
+            taskListData[item].map(renderHTML);
             
         } else {
             emptyList.classList.remove('hidden');
