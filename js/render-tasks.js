@@ -1,13 +1,13 @@
 'use strict';
 (function () {
+    var taskList = document.querySelector('.task-list'); // Место для вставки списка
+    var emptyList = document.querySelector('.empty-list'); // Блок который выводится если список пустой
+    var templateTaks = document.querySelector('#task-list-item').content; // Шаблон задачи по которому будем выводить элементы
+    var taskText = templateTaks.querySelector('.task-text'); // Место для вставки текса задачи
+    var btnRemove = templateTaks.querySelector('.btn-remove');  // Кнопка с id для удаления задачи
+
     // Функция рендерит весь список
     window.renderTasks = function () {
-        var taskList = document.querySelector('.task-list'); // Место для вставки списка
-        var emptyList = document.querySelector('.empty-list'); // Блок который выводится если список пустой
-        var templateTaks = document.querySelector('#task-list-item').content; // Шаблон задачи по которому будем выводить элементы
-        var taskText = templateTaks.querySelector('.task-text'); // Место для вставки текса задачи
-        var btnRemove = templateTaks.querySelector('.btn-remove');  // Кнопка с id для удаления задачи
-        
         taskList.textContent = ''; // Очищаем список, для отрисовки с 0
 
         var fragment = document.createDocumentFragment(); // Создаем фрагмент документа
@@ -17,30 +17,24 @@
             fragment.appendChild(taskElement);
         };
 
-        // Заполняем HTML шаблон данными
-        var initTask = function () {
-            var taskListData  = window.getData(window.Config.Data.OBJECT_NAME); // Получаем объект с данными из localStorage
-            var item = window.Config.Data.ITEM_NAME; // Получаем имя нужного нам массива с данными в объекте window.Config.Data.OBJECT_NAME
-            if (taskListData && taskListData[item].length !== 0) {
-                taskListData[item].reverse();
-                emptyList.classList.add('hidden');
-                taskListData[item].forEach(function (element) {
-                    taskText.textContent = element.text;
-                    btnRemove.id = element.id;
-                    insertInFragment();
-                });
-                
-            } else {
-                emptyList.classList.remove('hidden');
-            }
-        };
-
-        // Функция вставляет fragment в HTML
-        var insertFragmentToHTML = function () {
-            initTask();
-            taskList.appendChild(fragment);
+        var taskListData  = window.getData(window.Config.Data.OBJECT_NAME); // Получаем объект с данными из localStorage
+        var item = window.Config.Data.ITEM_NAME; // Получаем имя нужного нам массива с данными в объекте window.Config.Data.OBJECT_NAME
+        if (taskListData && taskListData[item].length !== 0) {
+            taskListData[item].reverse();
+            emptyList.classList.add('hidden');
+            taskListData[item].forEach(function (element) {
+                taskText.textContent = element.text;
+                btnRemove.id = element.id;
+                insertInFragment();
+            });
+            
+        } else {
+            emptyList.classList.remove('hidden');
+            return;
         }
-        insertFragmentToHTML();
+
+        // Вставляем DocumentFragment со всеми задачи в HTML
+        taskList.appendChild(fragment);
     };
 
     window.renderTasks();
