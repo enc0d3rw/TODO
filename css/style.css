@@ -78,3 +78,12 @@ ul.task-list li > p {
 .btn-remove:focus {
     outline: none;
 }
+
+.btn-save {
+    background-color: #20b34c;
+}
+
+.task-edit-area {
+    width: 100%;
+    font-size: 18px;
+}

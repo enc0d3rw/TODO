@@ -12,7 +12,7 @@
   <main>
     <div class="form-add">
         <div class="alert hidden">Текст</div>
-        <form action="#">
+        <form action="">
             <input type="text" class="task-value" name="tast-value" placeholder="Название задачи" minlength="2" required>
             <button class="btn add-task">Добавить</button>
           </form>
@@ -20,8 +20,17 @@
 
     <ul class="task-list"></ul>
     <template id="task-list-item">
-      <li><p class="task-text">Задача</p><button value="Удалить" id="0" class="btn-remove" onclick="window.removeTask(this)"></button></li>
+      <li class="list-item" ondblclick="window.renderTasks(this)"><p class="task-text">Задача</p><button value="Удалить" id="0" class="btn-remove" onclick="window.removeTask(this)"></button></li>
     </template>
+    <template id="form-edit">
+      <li>
+        <div class="alert hidden edit-alert">Текст</div>
+        <form action="">
+          <textarea name="task-edit" class="task-edit-area">Текст задачи</textarea>
+          <button class="btn btn-save" id="0" onclick="window.editTask(this); return false">Сохранить</button>
+        </form>
+      </li>
+  </template>
     <div class="empty-list hidden">Список задач пуст!</div>
   </main>
   <script src="js/config.js"></script>
@@ -30,5 +39,6 @@
   <script src="js/add-task.js"></script>
   <script src="js/remove-task.js"></script>
   <script src="js/save-list.js"></script>
+  <script src="js/edit-task.js"></script>
 </body>
 </html>

@@ -3,9 +3,9 @@
     var addTaskBtn = document.querySelector('.add-task'); // Кнопка добавления задачи
 
     // Функция проверяет валидность элемента
-    var checkInput = function (newTask) {
+    window.checkInput = function (newTask) {
         if (newTask.length === 0) {
-            return 'Введите текст для новой задачи!';
+            return 'Поле не может быть пустым!';
         } else if (newTask.length < 2) {
             return 'Минимальная длина 2 символа!';
         }
@@ -16,7 +16,7 @@
         evt.preventDefault();
         var taskInput = document.querySelector('.task-value'); // Получаем значения input'a с задачей
         var newTask = taskInput.value;
-        var error_msg = checkInput(newTask);
+        var error_msg = window.checkInput(newTask);
         var alert = document.querySelector('.alert'); // Место для вывода ошибок если валидация не прошла
 
         if (error_msg) {
